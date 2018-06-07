@@ -2,79 +2,61 @@
 
 function task1(array $arr, bool $hasReturned = false)
 {
+    foreach ($arr as $item) {
+        echo '<p>' . $item . '</p>';
+    }
     if ($hasReturned) {
         return implode('', $arr);
-    } else {
-        if (!empty($arr)) {
-            foreach ($arr as $item) {
-                echo '<p>' . $item . '</p>';
-            }
-        }
-        return null;
     }
+    return null;
 }
 
 function task2(string $str, ...$numbers)
 {
-    if ($numbers) {
-        $result = 0;
-        $error = false;
-        switch ($str) {
-            case '+':
-                foreach ($numbers as $number) {
-                    $result += $number;
-                }
-                break;
-            case '-':
-                foreach ($numbers as $numberKey => $numberVal) {
-                    if ($numberKey == 0) {
-                        $result = $numberVal;
-                    } else {
-                        $result -= $numberVal;
-                    }
-                }
-                break;
-            case '*':
-                $result = 1;
-                foreach ($numbers as $number) {
-                    $result *= $number;
-                }
-                break;
-            case '/':
-                foreach ($numbers as $numberKey => $numberVal) {
-                    if ($numberKey == 0) {
-                        $result = $numberVal;
-                    } else {
-                        $result /= $numberVal;
-                    }
-                }
-                break;
-            default:
-                $error = true;
-        }
-        if (!$error) {
-            echo implode(' ' . $str . ' ', $numbers) . ' = ' . $result;
-        } else {
+    $firstItem = $result = $numbers[0];
+    unset($numbers[0]);
+    switch ($str) {
+        case '+':
+            foreach ($numbers as $number) {
+                $result += $number;
+            }
+            break;
+        case '-':
+            foreach ($numbers as $number) {
+                $result -= $number;
+            }
+            break;
+        case '*':
+            foreach ($numbers as $number) {
+                $result *= $number;
+            }
+            break;
+        case '/':
+            foreach ($numbers as $number) {
+                $result /= $number;
+            }
+            break;
+        default:
             echo 'Оператор не распознан';
-        }
-    } else {
-        return null;
+            return null;
     }
+    echo $firstItem . ' ' . $str . ' ' . implode(' ' . $str . ' ', $numbers) . ' = ' . $result;
 }
 
-function task3($a, $b)
+function task3($row, $col)
 {
-    if (is_int($a) && is_int($b) && $a > 0 && $b > 0) {
-        echo '<table border="1">';
-        for ($i = 1; $i <= $a; $i++) {
-            echo '<tr>';
-            for ($j = 1; $j <= $b; $j++) {
-                echo '<td style="padding:20px;">' . $i*$j . '</td>';
-            }
-            echo '</tr>';
-        }
-        echo '</table>';
-    } else {
+    if ($row < 1 || $col < 1) {
         echo 'Аргументы должны представлять собой целые положительные числа';
+        return null;
     }
+    echo '<table border="1">';
+    for ($i = 1; $i <= $row; $i++) {
+        echo '<tr>';
+        for ($j = 1; $j <= $col; $j++) {
+            echo '<td style="padding:20px;">' . $i * $j . '</td>';
+        }
+        echo '</tr>';
+    }
+    echo '</table>';
+    task3(--$row, --$col);
 }

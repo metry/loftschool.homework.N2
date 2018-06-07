@@ -8,10 +8,9 @@ echo task1(['1 piece','2 piece','3 piece'], true);
 echo '<br>';
 echo task2('/', 12, 1, 1, 1.2);
 echo '<br>';
-echo task2('+', 12);
+echo task2('+', 12, 1);
 echo '<br>';
 echo task2('#', 12, 1, 1, 1.2);
-echo task2('+');
 
 echo '<br>';
 task3(8,8);
