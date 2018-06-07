@@ -18,6 +18,7 @@ function task2(string $str, ...$numbers)
 {
     if ($numbers) {
         $result = 0;
+        $error = false;
         switch ($str) {
             case '+':
                 foreach ($numbers as $number) {
@@ -49,9 +50,13 @@ function task2(string $str, ...$numbers)
                 }
                 break;
             default:
-                return null;
+                $error = true;
         }
-        echo implode(' ' . $str . ' ', $numbers) . ' = ' . $result;
+        if (!$error) {
+            echo implode(' ' . $str . ' ', $numbers) . ' = ' . $result;
+        } else {
+            echo 'Оператор не распознан';
+        }
     } else {
         return null;
     }
