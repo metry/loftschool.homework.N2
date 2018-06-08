@@ -60,3 +60,12 @@ function task3($row, $col)
     echo '</table>';
     task3(--$row, --$col);
 }
+
+function task6(string $filename)
+{
+    if (!file_exists($filename)) {
+        echo 'Файл не найден';
+        return null;
+    }
+    echo file_get_contents($filename);
+}
